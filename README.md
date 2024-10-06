@@ -3,11 +3,6 @@
 Coding stuff I haven’t done: https://docs.google.com/document/d/1hu8Ds_ZQ-iEeTfOhveOlSu1rzSQjDLae4uJ_NG3XDVM/edit
 
 ## Programming
-ICS3U1 - C++
-ICS4U1 - C++ (Classes)
-CS135 - Racket
-CS136 - C
-CS136L - Bash
 CS246 - C++
 
 Git, Bash (ls, cd, mkdir, rm, filter commands)
@@ -24,7 +19,7 @@ Structs
 Pointers
 Classes (Inheritance, Polymorphism, Member functions, setters/getters)
 
-### High School
+## High School (ICS3U1 and ICS4U1)
 
 Penguin wants to make a new D&D class called the coder, who destroys monsters with the power of code. He is trying to figure out how to describe his character’s attributes, such as his health, or his character name. To do this, he uses variables, such as:
 ```c++
@@ -113,7 +108,7 @@ class EvilPenguin: Creature {
 
 He then decides to switch languages to Racket because the University of Waterloo told him to do so.
 
-### CS 135
+## CS 135
 
 ### Functions
 
@@ -276,13 +271,20 @@ He finds new notation for writing lists
 (sname? v) => false for any other type
 ```
 
+## CS136 - C
+
+## CS136L - Bash
+
+
 ## Computer Architecture
 CS 330
 
 ## DSA
-CS231 - Algorithms
+
+## CS231 - Algorithms
 Two pointers, Sliding Window, Greedy, Divide and Conquer, DP, BFS, DFS, Bitmask, (Sorting)
-CS234 - Data Types and Structures
+
+## CS234 - Data Types and Structures
 Array (String), Linked List, Hashmap/Set, Stack, Queue (Heap-Priority Queue), Trees, Graphs (Unweighted, weighted)
 [https://leetcode.com/](https://leetcode.com/u/adamchen151/)
 
