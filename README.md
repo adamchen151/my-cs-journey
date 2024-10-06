@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Coding Journey
+## Coding Projects to-do:
+Coding stuff I haven’t done: https://docs.google.com/document/d/1hu8Ds_ZQ-iEeTfOhveOlSu1rzSQjDLae4uJ_NG3XDVM/edit
 
-## Getting Started
+## Programming
+ICS3U1 - C++
+ICS4U1 - C++ (Classes)
+CS135 - Racket
+CS136 - C
+CS136L - Bash
+CS246 - C++
 
-First, run the development server:
+Git, Bash (ls, cd, mkdir, rm, filter commands)
+C++, Python, React, SQL
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Basic Concepts:
+Functional vs Imperative Programming
+Variables/Constants
+Types (String, Integer, etc)
+Loops/Recursion
+Functions
+Conditionals/Boolean Operators
+Structs
+Pointers
+Classes (Inheritance, Polymorphism, Member functions, setters/getters)
+
+### High School
+
+Penguin wants to make a new D&D class called the coder, who destroys monsters with the power of code. He is trying to figure out how to describe his character’s attributes, such as his health, or his character name. To do this, he uses variables, such as:
+```c++
+int x = 5;
+string name = “Penguin”;
+```
+If he wants to change the name, he can do so:
+```c++
+name = “Epic Penguin”;
+```
+But the name is a string, which means he can’t change the name to an integer
+```c++
+name = 123 // Not allowed!
+```
+This is an example of static typing, which means that once a variable is one type, it can't change into another type. C++ is a statically typed language, but Racket and Python are dynamically typed.
+
+Penguin then makes a variable called max_hp, but realises that his max_hp will always be the same. He decides to make it a constant, so it can't be changed, even by accident:
+```c++
+const int max_hp = 69;
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Even though Penguin will never die, he still wants a way to check, so he uses an if/else block, and a boolean operator
+```c++
+if (max_hp <= 0) {
+  // Penguin is dead :(
+} else {
+  // Penguin is alive!!
+}
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To hit a skeleton monster, he needs to call a function, which is basically a block of code that can be reused:
+```c++
+void hit(Creature c1, Creature c2) {
+  c2.get_health() -= c1.get_damage();
+}
+```
+The parameters are c1 and c2, and void is the return type.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+He sees a skeleton, and tries to hit it five times. He could call the function 5 times, but that would take 5 lines of code. Instead, he could use a loop:
+```c++
+for (int i = 0; i < 5; i++) {
+  hit(player, skeleton);
+}
+```
 
-## Learn More
+Penguin notices that if he could put everything relating to himself in a class, the code would be a lot cleaner than having scattered functions. So he makes a class:
+```c++
+class Penguin {
+  private:
+    std::string name;
+    const int max_hp;
+    int current_hp;
+    const int damage;
+  public:
+    // Getters and Setters
 
-To learn more about Next.js, take a look at the following resources:
+    void hit(Creature c2) {
+      c2.get_health() -= this->get_damage();
+    }
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+He then realises that all of the monsters in this game have max_hp, current_hp, and damage attributes. He makes a class "Creature", then lets the "Penguin" class inherit from "Creature"
+```c++
+class Creature {
+  // The code previously in the Penguin class
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+// Penguin inherits from Creature
+class Penguin: Creature {
+  public:
+    void waddle() {
+      std::cout << "Yo what the skibidi";
+    }
+}
+```
+He also wants to make an evil penguin who can also waddle in a different way. He can do this with polymorphism:
+```c++
+class EvilPenguin: Creature {
+  public:
+    void waddle() {
+      std::cout << "Erm what the sigma";
+    }
+}
+```
 
-## Deploy on Vercel
+He then decides to switch languages to Racket because the University of Waterloo told him to do so.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### CS 135
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Computer Architecture
+CS 330
+
+## DSA
+CS231 - Algorithms
+Two pointers, Sliding Window, Greedy, Divide and Conquer, DP, BFS, DFS, Bitmask, (Sorting)
+CS234 - Data Types and Structures
+Array (String), Linked List, Hashmap/Set, Stack, Queue (Heap-Priority Queue), Trees, Graphs (Unweighted, weighted)
+[https://leetcode.com/](https://leetcode.com/u/adamchen151/)
+
+## Operating Systems
+
+## Computer Networking
+CS 330
+
+## Databases
+CS 338?
+
+## Languages and Compilers
+
+## Distributed Systems
