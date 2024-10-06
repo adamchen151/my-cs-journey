@@ -115,7 +115,166 @@ He then decides to switch languages to Racket because the University of Waterloo
 
 ### CS 135
 
+### Functions
 
+To define a function in Racket to subtract damage from his current_hp, Penguin does:
+```racket
+;; This is a comment! 
+(define (take_hit current_hp damage)
+  (- current_hp damage))
+```
+In Racket, everything is a function, even operators like plus and minus. Because of this, instead of writing a + b, Penguin writes (+ a b)!
+
+To debug his code, Penguin traces it using stepping rules. For example:
+```racket
+(take_hit 40 5)
+= (- 40 5)
+= 35
+```
+
+Penguin notices that in Racket, there are no variables (only constants), no loops, and that functions can only have one expression in them.
+
+### Helper Functions and Wrapper Functions
+
+Penguin makes a function to see what kind of pizza the skeletons love the most, so he can lure them all to one place.
+
+### Booleans
+
+While implementing the function which checks if he is dead, Penguin notices that booleans operators are also functions, so he writes:
+```racket
+(<= current_hp 0)
+```
+He comes up with the fancy name "predicate" to describle a function that returns a boolean.
+
+He realises there are ways to simplify conditional expressions.
+```racket
+(cond [(<= current_hp 0) "dead"]
+      [else (cond [(<= current_hp 10) "fine"]
+                  [else "healthy"])]
+;; Can be simplifed to:
+(cond [(<= current_hp 0) "dead"]
+      [(<= current_hp 10) "fine"]
+      [else "healthy"])
+```
+
+### Design Recipe
+
+Penguin comes across an ancient text called the "CS 135 style guide", which gives him guidelines for good style, which can help readability.
+In it, he finds a forbidden piece of knowledge:
+
+A design recipe has 5 components:
+- Purpose: Describes what the function does
+- Examples
+- Contract: Describes what types the function consumes and produces (eg: Str Str -> Bool)
+- Definition: The function header and body
+- Tests
+
+He learns that he can write tests:
+```racket
+;; Use check-expect for exact values
+(check-expect (+ 1 1) 2)
+
+;; Use check-within for inexact values
+(check-within (- pi 3.14) 0.1)
+
+;; Use check-error if you are expecting an error
+(check-error (- 1 "huh"))
+```
+
+### Structures
+
+Penguin decides to move his "Creature" code to Racket. He uses a Racket struct:
+```
+;; Definition
+(define-struct creature (name hp damage))
+
+;; Constructor
+(define penguin (make-creature "Penguin" 69 10))
+
+;; Selectors
+(define hp (creature-hp penguin))
+```
+
+### Lists
+
+To Penguin's annoyance, in the Beginning Student version of Racket, lists are written as:
+```
+(define penguin-list (cons "first item" (cons "second item" (cons "etc" empty))))
+```
+Penguin uses first and rest to access parts of the list, and some other helpful functions
+```
+;; First returns the first value in the list
+(first (cons 1 (cons 2 empty)))
+= 1
+
+;; Rest returns the rest of the list
+(rest (cons 1 (cons 2 empty)))
+= (cons 2 empty)
+
+(cons? penguin-list) produces true if penguin-list is a non-empty list, and false otherwise
+(empty? penguin-list) is pretty self explanatory
+(list? penguin-list) produces true if penguin-list is any type of list, whether empty or not
+```
+
+He wonders how to iterate through the list, because there are no loops, and he has created a list of skeletons to hit. Luckly, he learns of recursion!
+```
+;; (define (hit-multiple-skeletons penguin skeletons) lets penguin hit every skeleton in skeletons!
+;; hit-multiple-skeletons: Creature (listof Int) -> (listof Int)
+(define (hit-multiple-skeletons penguin skeletons)
+  (cond [(empty? skeletons) empty]
+        [else (cons (- (first skeletons)
+                       (creature-damage penguin))
+                    (hit-multiple-skeletons penguin (rest skeletons)))]))
+```
+
+He also finds out about templates, which help him write code faster by giving him a template to work of off rather than starting from scratch
+```
+;; listof-X-template: (listof X) -> Any
+(define (listof-X-template lox)
+  (cond [(empty? lox) ...]
+        [(cons? lox) (... (X-template (first lox))
+                          (listof-X-template (rest lox)))]))
+```
+
+Sorting
+
+### Natural Numbers, and More Lists
+
+Penguin wants to be fancy, so he only lets damage be in the set natural numbers. But he needs to define this, so he says:
+```
+A Nat is one of:
+* 0
+* (+ 1 Nat)
+```
+
+Penguin uses a dictonary to store the key-value pairs for his favorite foods
+
+He finds new notation for writing lists
+```
+(define penguin-list (cons "first item" (cons "second item" (cons "etc" empty))))
+;; becomes
+(define penguin-list (list "first item" "second item" "etc"))
+```
+
+### All stepping rules
+```
+(f v1...vn) => v when f is built-in
+(f v1...vn) => exp when (define (f x1...xn) exp) occurs to the left (basically replace constants with their value)
+(and false ...) => false
+(and true ...) => (and ...)
+(and) => true
+(or true ...) => true
+(or false ...) => (or ...)
+(or) => false
+(cond [false exp] ...) => (cond ...)
+(cond [true exp] ...) => exp
+(cond [else exp] ...) => exp
+
+;; Structures
+(sname-fname i (name-sname v1...vn)) => vi
+(sname? (make-sname v1...vn)) => true
+(sname? v) => false for any other type
+```
 
 ## Computer Architecture
 CS 330
