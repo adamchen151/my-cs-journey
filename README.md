@@ -179,7 +179,7 @@ He learns that he can write tests:
 ### Structures
 
 Penguin decides to move his "Creature" code to Racket. He uses a Racket struct:
-```
+```racket
 ;; Definition
 (define-struct creature (name hp damage))
 
@@ -193,11 +193,11 @@ Penguin decides to move his "Creature" code to Racket. He uses a Racket struct:
 ### Lists
 
 To Penguin's annoyance, in the Beginning Student version of Racket, lists are written as:
-```
+```racket
 (define penguin-list (cons "first item" (cons "second item" (cons "etc" empty))))
 ```
 Penguin uses first and rest to access parts of the list, and some other helpful functions
-```
+```racket
 ;; First returns the first value in the list
 (first (cons 1 (cons 2 empty)))
 = 1
@@ -212,7 +212,7 @@ Penguin uses first and rest to access parts of the list, and some other helpful 
 ```
 
 He wonders how to iterate through the list, because there are no loops, and he has created a list of skeletons to hit. Luckly, he learns of recursion!
-```
+```racket
 ;; (define (hit-multiple-skeletons penguin skeletons) lets penguin hit every skeleton in skeletons!
 ;; hit-multiple-skeletons: Creature (listof Int) -> (listof Int)
 (define (hit-multiple-skeletons penguin skeletons)
@@ -223,7 +223,7 @@ He wonders how to iterate through the list, because there are no loops, and he h
 ```
 
 He also finds out about templates, which help him write code faster by giving him a template to work of off rather than starting from scratch
-```
+```racket
 ;; listof-X-template: (listof X) -> Any
 (define (listof-X-template lox)
   (cond [(empty? lox) ...]
@@ -236,7 +236,7 @@ Sorting
 ### Natural Numbers, and More Lists
 
 Penguin wants to be fancy, so he only lets damage be in the set natural numbers. But he needs to define this, so he says:
-```
+```racket
 A Nat is one of:
 * 0
 * (+ 1 Nat)
@@ -245,14 +245,14 @@ A Nat is one of:
 Penguin uses a dictonary to store the key-value pairs for his favorite foods
 
 He finds new notation for writing lists
-```
+```racket
 (define penguin-list (cons "first item" (cons "second item" (cons "etc" empty))))
 ;; becomes
 (define penguin-list (list "first item" "second item" "etc"))
 ```
 
 ### All stepping rules
-```
+```racket
 (f v1...vn) => v when f is built-in
 (f v1...vn) => exp when (define (f x1...xn) exp) occurs to the left (basically replace constants with their value)
 (and false ...) => false
@@ -274,6 +274,10 @@ He finds new notation for writing lists
 ## CS136 - C
 
 ## CS136L - Bash
+
+## Waterloo Rocketry
+
+## Waterloo Formula Electric
 
 
 ## Computer Architecture
