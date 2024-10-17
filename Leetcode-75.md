@@ -142,3 +142,60 @@ public:
 ```
 
 ## 334. Increasing Triplet Subsequence
+```c++
+class Solution {
+public:
+    bool increasingTriplet(vector<int>& nums) {
+        int n = nums.size();
+        int low = nums[0], lowest = nums[0];
+        int secondLow = INT_MAX;
+
+        // If new number is lower than low and we have a chain of 2, put it in low2
+        // If we have a second chain of 2 which has a smaller second number, replace the first one
+        for (int i = 1; i < n; i++) {
+            if (nums[i] < lowest)
+                lowest = nums[i];
+            if (nums[i] > lowest && nums[i] < secondLow) {
+                low = lowest;
+                secondLow = nums[i];
+            }
+            if (nums[i] > low && nums[i] < secondLow) {
+                secondLow = nums[i];
+            }
+            if (nums[i] > secondLow) return true;
+        }
+
+        return false;
+    }
+};
+```
+
+## 443. String Compression
+```c++
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int n = chars.size();
+        string compressed;
+        char currChar = chars[0];
+        int currNum = 1;
+        for (int i = 1; i < n; i++) {
+            if (chars[i] != currChar) {
+                compressed += currChar;
+                if (currNum > 1) compressed += to_string(currNum);
+                currChar = chars[i];
+                currNum = 1;
+            }
+            else currNum++;
+        }
+        compressed += currChar;
+        if (currNum > 1) compressed += to_string(currNum);
+
+        n = compressed.size();
+        for (int i = 0; i < n; i++) {
+            chars[i] = compressed[i];
+        }
+        return n;
+    }
+};
+```
