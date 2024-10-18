@@ -347,3 +347,88 @@ public:
     }
 };
 ```
+
+## 1004. Max Consecutive Ones III
+```c++
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int ans = 0;
+        int low = 0, zeroes = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == 0)
+                zeroes++;
+
+            while (zeroes > k) {
+                if (nums[low] == 0)
+                    zeroes--;
+                low++;
+            }
+
+            ans = max(ans, i - low + 1);
+        }
+
+        return ans;
+    }
+};
+```
+
+## 1493. Longest Subarray of 1's After Deleting One Element
+```c++
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        int ans = 0;
+        int low = 0, zeroes = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == 0)
+                zeroes++;
+
+            while (zeroes > 1) {
+                if (nums[low] == 0)
+                    zeroes--;
+                low++;
+            }
+
+            if (i - low > ans) ans = i - low;
+        }
+
+        return ans;
+    }
+};
+```
+
+# Prefix Sum
+## 1732. Find the Highest Altitude
+```c++
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        int ans = 0, curHeight = 0;
+        for (int height : gain) {
+            curHeight += height;
+            ans = max(ans, curHeight);
+        }
+        return ans;
+    }
+};
+```
+
+## 724. Find Pivot Index
+```c++
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int prefix = 0, suffix = 0;
+        for (int i : nums) suffix += i;
+
+        for (int i = 0; i < nums.size(); i++) {
+            suffix -= nums[i];
+            if (prefix == suffix) return i;
+            prefix += nums[i];
+        }
+
+        return -1;
+    }
+};
+```
