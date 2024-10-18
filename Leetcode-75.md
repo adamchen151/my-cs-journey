@@ -432,3 +432,114 @@ public:
     }
 };
 ```
+
+# Hash Map/Set
+## 2215. Find the Difference of Two Arrays
+```c++
+class Solution {
+public:
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        set<int> s1(nums1.begin(), nums1.end());
+        set<int> s2(nums2.begin(), nums2.end());
+        vector<int> ans1, ans2;
+
+        for (int i : s1) {
+            if (s2.find(i) == s2.end()){
+                ans1.push_back(i);
+            }
+        }
+
+        for (int i : s2) {
+            if (s1.find(i) == s1.end()) {
+                ans2.push_back(i);
+            }
+        }
+
+        return {ans1, ans2};
+    }
+};
+```
+
+## 1207. Unique Number of Occurrences
+```c++
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        map<int, int> seen;
+        for (int i : arr) {
+            seen[i]++;
+        }
+
+        set<int> occurrences;
+        for (auto kv : seen) {
+            if (occurrences.find(kv.second) != occurrences.end())
+                return false;
+            occurrences.insert(kv.second);
+        }
+        return true;
+    }
+};
+```
+
+## 1657. Determine if Two Strings Are Close
+```c++
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
+        // Hashmap of both, make sure the characters
+        // contained are the same, then make sure
+        // the numbers of characters are the same
+        map<int, int> m1, m2;
+        map<int, int> s1, s2;
+        for (char c : word1) 
+            m1[c]++;
+        for (char c : word2) 
+            m2[c]++;
+        for (auto kv : m1) {
+            if (m2[kv.first] == 0) return false;
+            s1[kv.second]++;
+        }
+        for (auto kv : m2) {
+            if (m1[kv.first] == 0) return false;
+            s2[kv.second]++;
+        }
+        for (auto kv : s1) 
+            if (s2[kv.first] != kv.second) return false;
+        for (auto kv : s2) 
+            if (s1[kv.first] != kv.second) return false;
+
+        return true;
+    }
+};
+```
+
+## 2352. Equal Row and Column Pairs
+```c++
+class Solution {
+public:
+    vector<int> getColumn(vector<vector<int>>& grid, int n, int colNum) {
+        vector<int> col(n);
+        for (int i = 0; i < n; i++) {
+            col[i] = grid[i][colNum];
+        }
+        return col;
+    }
+    int equalPairs(vector<vector<int>>& grid) {
+        int pairs = 0;
+        map<vector<int>, int> s;
+        int n = grid.size();
+        for (int i = 0; i < n; i++) {
+            s[grid[i]]++;
+        }
+
+        // Compare columns to rows
+        for (int i = 0; i < n; i++) {
+            pairs += s[getColumn(grid, n, i)];
+        }
+
+        return pairs;
+    }
+};
+```
+
+# Stack
