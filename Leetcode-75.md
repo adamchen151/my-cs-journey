@@ -1,3 +1,8 @@
+# LeetCode 75
+
+These are my solutions to the problems in the LeetCode 75 study plan. After I complete these, I'm going to do the LeetCode 150 study plan.
+
+# Array/String
 ## 1768. Merge Strings Alternately
 ```c++
 class Solution {
@@ -196,6 +201,149 @@ public:
             chars[i] = compressed[i];
         }
         return n;
+    }
+};
+```
+
+# Two Pointers
+## 283. Move Zeroes
+```c++
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int n = nums.size();
+        int cur = 0, zeroes = 0;
+        for (int i = 0; i < n; i++) {
+            nums[cur] = nums[i];
+            if (nums[i] != 0) 
+                cur++;
+            else
+                zeroes++;
+        }
+
+        for (int i = n - 1; i >= n - zeroes; i--) {
+            nums[i] = 0;
+        }
+    }
+};
+```
+
+## 392. Is Subsequence
+```c++
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        if (s == t) return true;
+        int cur = 0;
+        for (int i = 0; i < t.size(); i++) {
+            if (s[cur] == t[i])
+                cur++;
+            if (cur >= s.size()) return true;
+        }
+        return false;
+    }
+};
+```
+
+## 11. Container With Most Water
+```c++
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int currMax = 0;
+        int low = 0, high = height.size() - 1;
+
+        while (low < high) {
+            int curr = min(height[low], height[high]) * (high - low);
+            if (curr > currMax)
+                currMax = curr;
+            if (height[low] > height[high])
+                high--;
+            else 
+                low++; 
+        }
+        return currMax;
+    }
+};
+```
+
+## 1679. Max Number of K-Sum Pairs
+```c++
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int low = 0, high = nums.size() - 1;
+        int count = 0;
+        while (low < high) {
+            int sum = nums[low] + nums[high];
+            if (sum == k) {
+                count++;
+                low++;
+                high--;
+            }
+            else if (sum < k)
+                low++;
+            else
+                high--;
+        }
+        return count;
+    }
+};
+```
+
+# Sliding Window
+## 643. Maximum Average Subarray 1
+```c++
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        double currSum = nums[0], maxSum = -999999;
+        int n = nums.size();
+        int low = 0;
+        for (int i = 1; i < n; i++) {
+            if (i < k) currSum += nums[i];
+            else {
+                if (currSum > maxSum) 
+                    maxSum = currSum;
+                currSum += nums[i];
+                currSum -= nums[low];
+                low++;
+            }
+        }
+        
+        if (currSum > maxSum) 
+            maxSum = currSum;
+
+        return maxSum / k;
+    }
+};
+```
+
+## 1456. Maximum Number of Vowels in a Substring of Given Length
+```c++
+class Solution {
+public:
+    bool isVowel(char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+               c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
+    }
+    int maxVowels(string s, int k) {
+        int low = 0;
+        int n = s.size();
+        int curr = 0, max = 0;
+
+        for (int i = 0; i < k; i++)
+            if (isVowel(s[i])) curr++;
+        max = curr;
+        for (int i = k; i < n; i++) {
+            if (isVowel(s[i])) curr++;
+            if (isVowel(s[low])) curr--;
+            low++;
+            if (curr > max) 
+                max = curr;
+        }
+        return max;
     }
 };
 ```
